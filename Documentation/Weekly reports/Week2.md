@@ -15,6 +15,8 @@ I am also unsure if my project is challenging/complex enough for this course.
 
 - Modified the Minesweeper game so that it can interact with the AI
 
+- Added a function that will hide all information from the AI that the player wouldn't know
+
 The current plan of implementation is that the Minesweeper game will call 
 the AI class' function. It will receive back info on where to click, and 
 then click there. After clicking on those tiles, the game board will update 
