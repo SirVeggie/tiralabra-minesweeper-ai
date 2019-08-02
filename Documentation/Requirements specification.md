@@ -8,7 +8,7 @@ Solution: Check all possible combinations and see if there's anything in common.
 
 Input will be an integer array of the minefield.
 
-Returns an array where safe spots(1) and mines(2) are marked. For example:
+Returns an array where safe spots(1) and mines/flags(2) are marked. For example:
 
 `000001000022000100100`
 
