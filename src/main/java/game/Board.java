@@ -1,5 +1,7 @@
 package game;
 
+import solver.*;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -27,9 +29,9 @@ public class Board extends JPanel {
     private final int DRAW_MARK = 11;
     private final int DRAW_WRONG_MARK = 12;
 
-    private final int N_MINES = 40;
+    private final int N_MINES = 60;
     private final int N_ROWS = 16;
-    private final int N_COLS = 16;
+    private final int N_COLS = 32;
 
     private final int BOARD_WIDTH = N_COLS * CELL_SIZE + 1;
     private final int BOARD_HEIGHT = N_ROWS * CELL_SIZE + 1;
@@ -41,9 +43,12 @@ public class Board extends JPanel {
 
     private int allCells;
     private final JLabel statusbar;
+    
+    private MineSolver solver;
 
     public Board(JLabel statusbar) {
 
+        this.solver = new MineSolver();
         this.statusbar = statusbar;
         initBoard();
     }

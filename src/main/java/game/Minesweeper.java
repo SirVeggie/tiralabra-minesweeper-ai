@@ -17,7 +17,6 @@ public class Minesweeper extends JFrame {
     private JLabel statusbar;
 
     public Minesweeper() {
-
         initUI();
     }
 
