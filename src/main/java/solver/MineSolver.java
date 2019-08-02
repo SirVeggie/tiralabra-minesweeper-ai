@@ -10,8 +10,7 @@ public class MineSolver {
             result = solveComplex(field);
         }
         
-        return new int[]{1,1,1,1};
-        //return result;
+        return result;
     }
     
     private int[] solveLocal(int[] field) {

@@ -329,14 +329,14 @@ public class Board extends JPanel {
                 } else if (e.getButton() == MouseEvent.BUTTON1) {
                     clickTile(cCol, cRow, 1);
                 } else {
-                    int[] result = solver.solve(modifyMinefieldForAI(field));
+                    int[] result = solver.solve(modifyMinefieldForAI(field.clone()));
                     
                     if (result != null) {
                         for (int i = 0; i < allCells; i++) {
                             if (result[i] == 1) {
-                                clickTile(i / N_COLS, i % N_COLS, 1);
+                                clickTile(i % N_COLS, i / N_COLS, 1);
                             } else if (result[i] == 2) {
-                                clickTile(i / N_COLS, i % N_COLS, 3);
+                                clickTile(i % N_COLS, i / N_COLS, 3);
                             }
                         }
                     }
