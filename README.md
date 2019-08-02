@@ -6,7 +6,6 @@ Code under 'game' is the actual game, while code under 'solver' is the AI.
 So the 'game' is not part of the project since the project is the solver AI.
 
 Code under 'game' is copied and modified from here:
-
 https://github.com/janbodnar/Java-Minesweeper-Game
 
 ## Documentation
