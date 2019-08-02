@@ -1,3 +1,4 @@
+# Week 2 Report
 
 - Created the gradle project.
 
@@ -12,6 +13,7 @@ Based on this it is very hard to estimate the time and space complexities.
 
 I am also unsure if my project is challenging/complex enough for this course.
 
+- Modified the Minesweeper game so that it can interact with the AI
 
 The current plan of implementation is that the Minesweeper game will call 
 the AI class' function. It will receive back info on where to click, and 
