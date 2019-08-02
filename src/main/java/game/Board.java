@@ -30,8 +30,8 @@ public class Board extends JPanel {
     private final int DRAW_WRONG_MARK = 12;
 
     private final int N_MINES = 60;
-    private final int N_ROWS = 16;
     private final int N_COLS = 32;
+    private final int N_ROWS = 16;
 
     private final int BOARD_WIDTH = N_COLS * CELL_SIZE + 1;
     private final int BOARD_HEIGHT = N_ROWS * CELL_SIZE + 1;
@@ -48,7 +48,7 @@ public class Board extends JPanel {
 
     public Board(JLabel statusbar) {
 
-        this.solver = new MineSolver();
+        this.solver = new MineSolver(N_MINES, N_COLS, N_ROWS);
         this.statusbar = statusbar;
         initBoard();
     }
@@ -332,7 +332,7 @@ public class Board extends JPanel {
                     int[] result = solver.solve(modifyMinefieldForAI(field.clone()));
                     
                     if (result != null) {
-                        for (int i = 0; i < allCells; i++) {
+                        for (int i = 0; i < result.length; i++) {
                             if (result[i] == 1) {
                                 clickTile(i % N_COLS, i / N_COLS, 1);
                             } else if (result[i] == 2) {
