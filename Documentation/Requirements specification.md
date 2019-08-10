@@ -46,4 +46,5 @@ If calculating one combination is constant, then the time complexity is O(s), wh
 ![alt text](/Documentation/Images/Time%20complexity.png)
 
 n = size of the field
+
 k = number of mines
