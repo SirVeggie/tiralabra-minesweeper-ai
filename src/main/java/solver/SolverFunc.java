@@ -1,17 +1,19 @@
 package solver;
 
 public class SolverFunc {
-    private final int T_CLICK = 1;
-    private final int T_FLAG = 3;
+    private final int A_CLICK = 1;
+    private final int A_FLAG = 3;
     
     private int N_MINES;
     private int N_COLS;
     private int N_ROWS;
+    private int FIELD_SIZE;
     
     public SolverFunc(int mines, int cols, int rows) {
         this.N_MINES = mines;
         this.N_COLS = cols;
         this.N_ROWS = rows;
+        this.FIELD_SIZE = cols*rows;
     }
     
     /**
@@ -56,7 +58,7 @@ public class SolverFunc {
             if (pointer < 0) {
                 continue;
             } else if (field[pointer] == 10) {
-                output[pointer] = T_FLAG;
+                output[pointer] = A_FLAG;
             }
         }
         
@@ -80,7 +82,7 @@ public class SolverFunc {
             if (pointer < 0) {
                 continue;
             } else if (field[pointer] == 10) {
-                output[pointer] = T_CLICK;
+                output[pointer] = A_CLICK;
             }
         }
         
@@ -100,57 +102,48 @@ public class SolverFunc {
      * @return output Returns the modified output parameter.
      */
     public int relativePos(int pos, int truepos) {
+        int row = getTileRow(truepos);
+        int result = -1;
+        
         switch (pos) {
             case 0:
-                return truepos - N_COLS - 1;
+                result = truepos - N_COLS - 1;
+                if (getTileRow(result) != row - 1 || result < 0) result = -1;
+                break;
             case 1:
-                return truepos - N_COLS;
+                result = truepos - N_COLS;
+                if (result < 0) result = -1;
+                break;
             case 2:
-                return truepos - N_COLS + 1;
+                result = truepos - N_COLS + 1;
+                if (getTileRow(result) != row - 1 || result < 0) result = -1;
+                break;
             case 3:
-                return truepos - 1;
+                result = truepos - 1;
+                if (getTileRow(result) != row || result < 0) result = -1;
+                break;
             case 4:
-                return truepos + 1;
+                result = truepos + 1;
+                if (getTileRow(result) != row || result >= FIELD_SIZE) result = -1;
+                break;
             case 5:
-                return truepos + N_COLS - 1;
+                result = truepos + N_COLS - 1;
+                if (getTileRow(result) != row + 1 || result >= FIELD_SIZE) result = -1;
+                break;
             case 6:
-                return truepos + N_COLS;
+                result = truepos + N_COLS;
+                if (result >= FIELD_SIZE) result = -1;
+                break;
             case 7:
-                return truepos + N_COLS + 1;
+                result = truepos + N_COLS + 1;
+                if (getTileRow(result) != row + 1 || result >= FIELD_SIZE) result = -1;
+                break;
         }
         
-        return -1;
+        return result;
     }
     
-    // Will probably delete this
-    public int[] getAdjacentTiles(int[] field, int pos) {
-        int[] tiles = new int[8];
-        
-        if (pos - N_COLS - 1 >= 0) {
-            tiles[0] = field[pos - N_COLS - 1];
-        }
-        if (pos - N_COLS >= 0) {
-            tiles[1] = field[pos - N_COLS];
-        }
-        if (pos - N_COLS + 1 >= 0) {
-            tiles[2] = field[pos - N_COLS + 1];
-        }
-        if (pos - 1 >= 0) {
-            tiles[3] = field[pos - 1];
-        }
-        if (pos + 1 <= field.length) {
-            tiles[4] = field[pos + 1];
-        }
-        if (pos + N_COLS - 1 <= field.length) {
-            tiles[5] = field[pos + N_COLS - 1];
-        }
-        if (pos + N_COLS <= field.length) {
-            tiles[6] = field[pos + N_COLS];
-        }
-        if (pos + N_COLS + 1 <= field.length) {
-            tiles[7] = field[pos + N_COLS + 1];
-        }
-        
-        return tiles;
+    public int getTileRow(int pos) {
+        return pos / N_COLS;
     }
 }

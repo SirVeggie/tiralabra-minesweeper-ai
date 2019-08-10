@@ -1,6 +1,10 @@
 package solver;
 
 public class MineSolver {
+    private final int T_COVERED = 10;
+    private final int T_FLAG = 9;
+    private final int T_EMPTY = 0;
+    
     private int N_MINES;
     private int N_COLS;
     private int N_ROWS;
@@ -33,7 +37,8 @@ public class MineSolver {
                 continue;
             } else {
                 // Flag if possible
-                int count = sf.countAdjacentTiles(i, 10, field);
+                int count = sf.countAdjacentTiles(i, T_COVERED, field);
+                count += sf.countAdjacentTiles(i, T_FLAG, field);
                 
                 if (field[i] == count) {
                     progress = true;
