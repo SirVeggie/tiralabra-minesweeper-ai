@@ -27,11 +27,12 @@ Local solving goes through the entire field while also checking all 8 adjacent t
 
 **Time complexity**
 
-Time complexity for local solving should be O(9n) or just O(n), where n is the size of the field.
+Time complexity for local solving should be about O(n), where n is the size of the field.
 
 **Space complexity**
 
-Algorithm holds the entire field in memory, so space complexity is O(k), where k is the size of the field.
+Algorithm holds the entire field in memory, so space complexity is O(2k), where k is the size of the field.
+2k is because the algorithm also holds the output field in memory.
 
 ### Global solving
 
