@@ -14,6 +14,6 @@ https://github.com/janbodnar/Java-Minesweeper-Game
 
 ### Weekly reports
 
- - [Week 1](/Documentation/Week1.md)
+ - [Week 1](/Documentation/Weekly%20reports/Week1.md)
 
- - [Week 2](/Documentation/Week2.md)
+ - [Week 2](/Documentation/Weekly%20reports/Week2.md)
