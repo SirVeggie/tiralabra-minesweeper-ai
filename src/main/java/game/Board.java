@@ -329,14 +329,12 @@ public class Board extends JPanel {
                 } else if (e.getButton() == MouseEvent.BUTTON1) {
                     clickTile(cCol, cRow, 1);
                 } else {
-                    int[] result = solver.solve(modifyMinefieldForAI(field.clone()));
+                    int[] result = solver.solve(modifyMinefieldForAI(field));
                     
                     if (result != null) {
                         for (int i = 0; i < result.length; i++) {
-                            if (result[i] == 1) {
-                                clickTile(i % N_COLS, i / N_COLS, 1);
-                            } else if (result[i] == 2) {
-                                clickTile(i % N_COLS, i / N_COLS, 3);
+                            if (result[i] > 0) {
+                                clickTile(i % N_COLS, i / N_COLS, result[i]);
                             }
                         }
                     }
@@ -406,6 +404,8 @@ public class Board extends JPanel {
     }
     
     private int[] modifyMinefieldForAI(int[] minefield) {
+        minefield = minefield.clone();
+        
         for (int i = 0; i < allCells; i++) {
             if (minefield[i] >= 20) {
                 minefield[i] = 9;
