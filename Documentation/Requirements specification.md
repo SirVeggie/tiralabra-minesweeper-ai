@@ -1,6 +1,9 @@
+# Requirements Specification
 
 Inspiration for the minesweeper AI taken from here:
 https://magnushoff.com/minesweeper/
+
+### Explanation
 
 Problem: Find out safe places to click or locations of mines given a minesweeper game state.
 
@@ -12,4 +15,35 @@ Returns an array where safe spots(1) and mines/flags(2) are marked. For example:
 
 `000001000022000100100`
 
+## Complexities
+
+These are calculated for a single 'round' of solving.
+
+### Local solving
+
+Unlike Global, Local complexities are easier to estimate.
+
+Local solving goes through the entire field while also checking all 8 adjacent tiles.
+
+**Time complexity**
+
+Time complexity for local solving should be O(9n) or just O(n), where n is the size of the field.
+
+**Space complexity**
+
+Algorithm holds the entire field in memory, so space complexity is O(k), where k is the size of the field.
+
+### Global solving
+
 Generating all the possible combinations of mine locations is very time and memory consuming.
+
+Worst case:
+
+**Time complexity**
+
+If calculating one combination is constant, then the time complexity is O(s), where:
+
+!(/Documentation/Images/Time%20complexity.png)
+
+n = size of the field
+k = number of mines
