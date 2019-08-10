@@ -5,15 +5,33 @@ https://magnushoff.com/minesweeper/
 
 ### Explanation
 
-Problem: Find out safe places to click or locations of mines given a minesweeper game state.
+**Problem:** Find out safe places to click or locations of mines given a minesweeper game state.
 
-Solution: Check all possible combinations and see if there's anything in common. However this needs to be optimized.
+**Solution:** Check all possible combinations and see if there's anything in common. However this needs to be optimized.
+
+**Strategy:**
+
+Local solving -
+First perform local solving, which is many times faster than global solving.
+Find all legal actions based on only single tile information.
+If it is impossible to find any more local solutions, switch to more taxing global solving.
+
+Global solving -
+Find all possible combinations, and figure out if all of them have something in common.
+If so, make a legal move based on that information.
+
+Optimized global solving -
+To make global solving more viable, it must be optimized.
+Exclude all tiles that are not helpful in solving the current situation.
+For example if a covered tile only has covered tiles around it, then it most likely will not help.
+
+### Inputs and outputs
 
 Input will be an integer array of the minefield.
 
-Returns an array where safe spots(1) and mines/flags(2) are marked. For example:
+Returns an array where clickable spots(1) and mines/flags(3) are marked. For example:
 
-`000001000022000100100`
+`000001000033000100100`
 
 ## Complexities
 
