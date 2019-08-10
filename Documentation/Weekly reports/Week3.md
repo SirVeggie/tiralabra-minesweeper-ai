@@ -10,4 +10,12 @@ I also wrote javadoc for the new class' methods.
 
 Made some improvements to the requirements specification doc as well as fixed some minor things.
 
-The plan is to do tests for the existing classes next.
+The plan is to do tests for the existing classes next after writing this report.
+
+## Next week
+The plan is to start making the global solver next week.
+It is going to be clearly harder than the local solver and I'm not sure how exactly
+I'm going to approach this problem. I'm sure I'll figure it out after thinking about it
+and searching the web for tips.
+
+I'm thinking of making more of a brute force version first, after which I can try to optimize it.
