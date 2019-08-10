@@ -31,8 +31,7 @@ Time complexity for local solving should be about O(n), where n is the size of t
 
 **Space complexity**
 
-Algorithm holds the entire field in memory, so space complexity is O(2k), where k is the size of the field.
-2k is because the algorithm also holds the output field in memory.
+Algorithm holds the entire input and output fields in memory, so space complexity is O(2k), where k is the size of the field.
 
 ### Global solving
 
