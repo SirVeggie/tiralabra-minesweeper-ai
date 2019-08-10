@@ -32,7 +32,7 @@ public class SolverFunc {
             int pointer = relativePos(i, pos);
             
             if (pointer < 0) {
-                if (type == 0) count++;
+                if (type == -1) count++;
             } else if (field[pointer] == type) {
                 count++;
             }

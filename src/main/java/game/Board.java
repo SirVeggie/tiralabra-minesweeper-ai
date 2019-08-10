@@ -304,6 +304,10 @@ public class Board extends JPanel {
         }
     }
 
+    
+    
+    // Modified code by Veikka
+    
     private class MinesAdapter extends MouseAdapter {
 
         @Override
@@ -332,11 +336,7 @@ public class Board extends JPanel {
                     int[] result = solver.solve(modifyMinefieldForAI(field));
                     
                     if (result != null) {
-                        for (int i = 0; i < result.length; i++) {
-                            if (result[i] > 0) {
-                                clickTile(i % N_COLS, i / N_COLS, result[i]);
-                            }
-                        }
+                        autoClickTiles(result);
                     }
                 }
             }
@@ -400,6 +400,14 @@ public class Board extends JPanel {
 
         if (doRepaint) {
             repaint();
+        }
+    }
+    
+    private void autoClickTiles(int[] output) {
+        for (int i = 0; i < output.length; i++) {
+            if (output[i] > 0) {
+                clickTile(i % N_COLS, i / N_COLS, output[i]);
+            }
         }
     }
     
