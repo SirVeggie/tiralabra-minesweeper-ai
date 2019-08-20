@@ -28,6 +28,19 @@ public class MineSolver {
         return result;
     }
     
+    public int[] chord(int[] field, int pos) {
+        int[] result = new int[field.length];
+        
+        int count = sf.countAdjacentTiles(pos, 9, field);
+                
+        if (field[pos] == count) {
+            result = sf.clickAdjacentTiles(pos, field, result);
+            return result;
+        }
+        
+        return null;
+    }
+    
     private int[] solveLocal(int[] field) {
         int[] result = new int[field.length];
         boolean progress = false;

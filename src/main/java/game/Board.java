@@ -329,10 +329,23 @@ public class Board extends JPanel {
             else if ((x < N_COLS * CELL_SIZE) && (y < N_ROWS * CELL_SIZE)) {
 
                 if (e.getButton() == MouseEvent.BUTTON3) {
+                    
                     clickTile(cCol, cRow, 3);
+                    
                 } else if (e.getButton() == MouseEvent.BUTTON1) {
-                    clickTile(cCol, cRow, 1);
+                    
+                    if (field[(cRow * N_COLS) + cCol] > 0 && field[(cRow * N_COLS) + cCol] < 9) {
+                        int[] result = solver.chord(modifyMinefieldForAI(field), (cRow * N_COLS) + cCol);
+                            
+                        if (result != null) {
+                            autoClickTiles(result);
+                        }
+                    } else {
+                        clickTile(cCol, cRow, 1);
+                    }
+                    
                 } else {
+                    
                     int[] result = solver.solve(modifyMinefieldForAI(field));
                     
                     if (result != null) {
@@ -376,15 +389,13 @@ public class Board extends JPanel {
             }
 
         } else {
-
+            
             if (field[(cRow * N_COLS) + cCol] > COVERED_MINE_CELL) {
-
                 return;
             }
 
-            if ((field[(cRow * N_COLS) + cCol] > MINE_CELL)
-                    && (field[(cRow * N_COLS) + cCol] < MARKED_MINE_CELL)) {
-
+            if (field[(cRow * N_COLS) + cCol] > MINE_CELL) {
+                
                 field[(cRow * N_COLS) + cCol] -= COVER_FOR_CELL;
                 doRepaint = true;
 
