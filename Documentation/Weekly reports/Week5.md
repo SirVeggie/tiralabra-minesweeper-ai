@@ -5,7 +5,7 @@ Still haven't been able to catch up to schedule by much.
 Started doing more tests.
 
 Refactored the code a bit and added function combineArrays
-for the refactoring and for the future **plan**
+for some current code and for the future **plan**
 
 Even though I still haven't started complex solving,
 I have thought about how to make it in my head.
