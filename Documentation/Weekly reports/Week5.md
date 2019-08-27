@@ -26,11 +26,9 @@ marked as 1 and empty as 0.
 When a state for a strip has been succesfully validated,
 it will be added into a single array, as seen in the example:
 
-1st. state:	0001010010
-
-2nd. state:	0100110011
-
-result:		0101120021
+0001010010 1st. state\
+0100110011 2nd. state\
+0101120021 result
 
 When all valid states have been added together,
 we get the needed information easily: If there is a spot
