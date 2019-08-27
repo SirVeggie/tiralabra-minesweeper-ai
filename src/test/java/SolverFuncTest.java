@@ -61,13 +61,25 @@ public class SolverFuncTest {
                        0,0,0,10,0,10,0,0,0,0,
                        0,0,0,0,0,0,0,10,10,10};
         
-        int[] expected = {0,0,0,0,0,0,0,0,0,0,
+        int[] expected1 = {0,0,0,0,0,0,0,0,0,0,
                           0,0,0,0,1,0,0,0,0,0,
                           0,0,0,0,0,1,0,0,0,0,
                           0,0,0,1,0,1,0,0,0,0,
                           0,0,0,0,0,0,0,0,0,0};
         
-        int[] result = sf.flagAdjacentTiles(24, field, output)
+        int[] result1 = sf.flagAdjacentTiles(24, field, new int[50]);
+        
+        assertEquals(expected1, result1);
+        
+        int[] expected2 = {0,0,0,0,0,0,0,0,0,0,
+                           0,0,0,0,0,0,0,0,0,0,
+                           0,0,0,0,0,0,0,0,0,0,
+                           0,0,0,0,0,0,0,0,0,0,
+                           0,0,0,0,0,0,0,1,0,1};
+
+        int[] result2 = sf.flagAdjacentTiles(48, field, new int[50]);
+
+        assertEquals(expected2, result2);
     }
     
     @Test
