@@ -11,7 +11,7 @@ Even though I still haven't started complex solving,
 I have thought about how to make it in my head.
 So there is already a plan, now I have to realise it.
 
-## The plan:
+## The plan
 ### Search
 First search for all connected strips of unrevealed tiles
 that are bordering revealed tiles.
