@@ -48,21 +48,10 @@ public class SolverFunc {
      * 
      * @param pos Target point on the field.
      * @param field The field to search tiles from.
-     * @param output Array, where the marks are placed.
      * @return output Returns the modified output parameter.
      */
-    public int[] flagAdjacentTiles(int pos, int[] field, int[] output) {
-        for (int i = 0; i < 8; i++) {
-            int pointer = relativePos(i, pos);
-            
-            if (pointer < 0) {
-                continue;
-            } else if (field[pointer] == 10) {
-                output[pointer] = A_FLAG;
-            }
-        }
-        
-        return output;
+    public int[] flagAdjacentTiles(int pos, int[] field) {
+        return markAdjacentTiles(pos, field, 3);
     }
     
     /**
@@ -72,17 +61,21 @@ public class SolverFunc {
      * 
      * @param pos Target point on the field.
      * @param field The field to search tiles from.
-     * @param output Array, where the marks are placed.
      * @return output Returns the modified output parameter.
      */
-    public int[] clickAdjacentTiles(int pos, int[] field, int[] output) {
+    public int[] clickAdjacentTiles(int pos, int[] field) {
+        return markAdjacentTiles(pos, field, 1);
+    }
+    
+    private int[] markAdjacentTiles(int pos, int[] field, int mark) {
+        int[] output = new int[field.length];
         for (int i = 0; i < 8; i++) {
             int pointer = relativePos(i, pos);
             
             if (pointer < 0) {
                 continue;
             } else if (field[pointer] == 10) {
-                output[pointer] = A_CLICK;
+                output[pointer] = mark;
             }
         }
         
@@ -145,5 +138,19 @@ public class SolverFunc {
     
     public int getTileRow(int pos) {
         return pos / N_COLS;
+    }
+    
+    public int[] combineArrays(int[] array1, int[] array2) {
+        if (array1.length != array2.length) {
+            return null;
+        }
+        
+        int[] result = new int[array1.length];
+        
+        for (int i = 0; i < array1.length; i++) {
+            result[i] = array1[i] + array2[i];
+        }
+        
+        return result;
     }
 }

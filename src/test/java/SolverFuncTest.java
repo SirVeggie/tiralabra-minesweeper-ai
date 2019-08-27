@@ -62,12 +62,42 @@ public class SolverFuncTest {
                        0,0,0,0,0,0,0,10,10,10};
         
         int[] expected1 = {0,0,0,0,0,0,0,0,0,0,
+                          0,0,0,0,3,0,0,0,0,0,
+                          0,0,0,0,0,3,0,0,0,0,
+                          0,0,0,3,0,3,0,0,0,0,
+                          0,0,0,0,0,0,0,0,0,0};
+        
+        int[] result1 = sf.flagAdjacentTiles(24, field);
+        
+        assertEquals(expected1, result1);
+        
+        int[] expected2 = {0,0,0,0,0,0,0,0,0,0,
+                           0,0,0,0,0,0,0,0,0,0,
+                           0,0,0,0,0,0,0,0,0,0,
+                           0,0,0,0,0,0,0,0,0,0,
+                           0,0,0,0,0,0,0,3,0,3};
+
+        int[] result2 = sf.flagAdjacentTiles(48, field);
+
+        assertEquals(expected2, result2);
+    }
+    
+    @Test
+    public void testClicking() {
+        SolverFunc sf = new SolverFunc(60, 10, 5);
+        int[] field = {0,0,0,0,0,0,0,0,0,0,
+                       0,0,0,9,10,1,0,0,0,0,
+                       0,0,0,5,10,10,0,0,0,0,
+                       0,0,0,10,0,10,0,0,0,0,
+                       0,0,0,0,0,0,0,10,10,10};
+        
+        int[] expected1 = {0,0,0,0,0,0,0,0,0,0,
                           0,0,0,0,1,0,0,0,0,0,
                           0,0,0,0,0,1,0,0,0,0,
                           0,0,0,1,0,1,0,0,0,0,
                           0,0,0,0,0,0,0,0,0,0};
         
-        int[] result1 = sf.flagAdjacentTiles(24, field, new int[50]);
+        int[] result1 = sf.clickAdjacentTiles(24, field);
         
         assertEquals(expected1, result1);
         
@@ -77,7 +107,7 @@ public class SolverFuncTest {
                            0,0,0,0,0,0,0,0,0,0,
                            0,0,0,0,0,0,0,1,0,1};
 
-        int[] result2 = sf.flagAdjacentTiles(48, field, new int[50]);
+        int[] result2 = sf.flagAdjacentTiles(48, field);
 
         assertEquals(expected2, result2);
     }

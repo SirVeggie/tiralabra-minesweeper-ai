@@ -29,12 +29,10 @@ public class MineSolver {
     }
     
     public int[] chord(int[] field, int pos) {
-        int[] result = new int[field.length];
-        
         int count = sf.countAdjacentTiles(pos, 9, field);
                 
         if (field[pos] == count) {
-            result = sf.clickAdjacentTiles(pos, field, result);
+            int[] result = sf.clickAdjacentTiles(pos, field);
             return result;
         }
         
@@ -55,7 +53,7 @@ public class MineSolver {
                 
                 if (field[i] == count) {
                     progress = true;
-                    result = sf.flagAdjacentTiles(i, field, result);
+                    result = sf.flagAdjacentTiles(i, field);
                 }
                 
                 // Click if possible
@@ -63,7 +61,7 @@ public class MineSolver {
                 
                 if (field[i] == count) {
                     progress = true;
-                    result = sf.clickAdjacentTiles(i, field, result);
+                    result = sf.combineArrays(result, sf.clickAdjacentTiles(i, field));
                 }
             }
         }
