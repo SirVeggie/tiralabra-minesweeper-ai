@@ -1,6 +1,8 @@
 package com.vogella.junit.first;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+
+import javax.sound.sampled.SourceDataLine;
 
 import solver.*;
 
@@ -68,8 +70,7 @@ public class SolverFuncTest {
                           0,0,0,0,0,0,0,0,0,0};
         
         int[] result1 = sf.markAdjacentTiles(24, field, 3);
-        
-        assertEquals(expected1, result1);
+        assertEquals(true, arraysMatch(expected1, result1));
         
         int[] expected2 = {0,0,0,0,0,0,0,0,0,0,
                            0,0,0,0,0,0,0,0,0,0,
@@ -78,8 +79,7 @@ public class SolverFuncTest {
                            0,0,0,0,0,0,0,3,0,3};
 
         int[] result2 = sf.markAdjacentTiles(48, field, 3);
-
-        assertEquals(expected2, result2);
+        assertEquals(true, arraysMatch(expected2, result2));
     }
     
     @Test
@@ -132,13 +132,29 @@ public class SolverFuncTest {
         
         int[] expected = {2,3,4,5,6};
         
-        result = sf.combineArrays(one, two, three);
-        assertEquals(expected, result);
+        result = sf.combineArrays(one,two,three);
+        assertEquals(true, arraysMatch(expected, result));
         
         int[] four = {1,2,3};
         int[] five = {1,2,3,4};
         
         result = sf.combineArrays(four, five);
         assertEquals(null, result);
+    }
+    
+    
+    
+    // Helper functions
+    
+    private boolean arraysMatch(int[] array1, int[] array2) {
+        if (array1.length != array2.length) {
+            return false;
+        }
+        
+        for (int i = 0; i < array1.length; i++) {
+            if (array1[i] != array2[i]) return false;
+        }
+        
+        return true;
     }
 }
