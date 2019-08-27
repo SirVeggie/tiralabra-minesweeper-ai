@@ -151,4 +151,24 @@ public class SolverFuncTest {
         assertEquals(33, centerLower);
         assertEquals(34, rightLower);
     }
+    
+    @Test
+    public void testCombineArrays() {
+        SolverFunc sf = new SolverFunc(60, 10, 5);
+        int[] result;
+        int[] one = {0,0,0,0,0};
+        int[] two = {1,1,1,1,1};
+        int[] three = {1,2,3,4,5};
+        
+        int[] expected = {2,3,4,5,6};
+        
+        result = sf.combineArrays(one, two, three);
+        assertEquals(expected, result);
+        
+        int[] four = {1,2,3};
+        int[] five = {1,2,3,4};
+        
+        result = sf.combineArrays(four, five);
+        assertEquals(null, result);
+    }
 }

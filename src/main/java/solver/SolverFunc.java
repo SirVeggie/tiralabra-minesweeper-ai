@@ -83,8 +83,6 @@ public class SolverFunc {
     }
     
     /**
-     * relativePos(int pos, int truepos)
-     * 
      * Gets the absolute position of the wanted relative position.
      * [0][1][2]
      * [3][x][4]
@@ -140,15 +138,24 @@ public class SolverFunc {
         return pos / N_COLS;
     }
     
-    public int[] combineArrays(int[] array1, int[] array2) {
-        if (array1.length != array2.length) {
-            return null;
+    /**
+     * Adds the values of different arrays together, if same length.
+     * 
+     * @param arrays Any number of int[] type arrays.
+     * @return Returns the combined array.
+     */
+    public int[] combineArrays(int[]... arrays) {
+        int length = arrays[0].length;
+        for (int i = 1; i < arrays.length; i++) {
+            if (arrays[i].length != length) return null;
         }
         
-        int[] result = new int[array1.length];
+        int[] result = new int[length];
         
-        for (int i = 0; i < array1.length; i++) {
-            result[i] = array1[i] + array2[i];
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < arrays.length; j++) {
+                result[i] += arrays[j][i];
+            }
         }
         
         return result;
