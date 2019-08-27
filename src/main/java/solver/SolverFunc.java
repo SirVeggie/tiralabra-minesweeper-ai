@@ -17,8 +17,6 @@ public class SolverFunc {
     }
     
     /**
-     * countAdjacentTiles(int pos, int type, int[] field)
-     * 
      * Counts the adjacent tiles of a given position of the specific type.
      * 
      * @param pos Target point on the field.
@@ -42,8 +40,6 @@ public class SolverFunc {
     }
     
     /**
-     * flagAdjacentTiles(int pos, int[] field, int[] output)
-     * 
      * Marks all adjacent covered tiles for flagging.
      * 
      * @param pos Target point on the field.
@@ -55,8 +51,6 @@ public class SolverFunc {
     }
     
     /**
-     * clickAdjacentTiles(int pos, int[] field, int[] output)
-     * 
      * Marks all adjacent covered tiles for clicking.
      * 
      * @param pos Target point on the field.
@@ -67,7 +61,10 @@ public class SolverFunc {
         return markAdjacentTiles(pos, field, 1);
     }
     
-    private int[] markAdjacentTiles(int pos, int[] field, int mark) {
+    /**
+     * Use flag or click instead of mark for readability.
+     */
+    public int[] markAdjacentTiles(int pos, int[] field, int mark) {
         int[] output = new int[field.length];
         for (int i = 0; i < 8; i++) {
             int pointer = relativePos(i, pos);
