@@ -51,4 +51,62 @@ public class SolverFuncTest {
         count = sf.countAdjacentTiles(45, -1, field);
         assertEquals("Lower wall nearby", 3, count);
     }
+    
+    @Test
+    public void testFlagging() {
+        SolverFunc sf = new SolverFunc(60, 10, 5);
+        int[] field = {0,0,0,0,0,0,0,0,0,0,
+                       0,0,0,9,10,1,0,0,0,0,
+                       0,0,0,5,10,10,0,0,0,0,
+                       0,0,0,10,0,10,0,0,0,0,
+                       0,0,0,0,0,0,0,10,10,10};
+        
+        int[] expected = {0,0,0,0,0,0,0,0,0,0,
+                          0,0,0,0,1,0,0,0,0,0,
+                          0,0,0,0,0,1,0,0,0,0,
+                          0,0,0,1,0,1,0,0,0,0,
+                          0,0,0,0,0,0,0,0,0,0};
+        
+        int[] result = sf.flagAdjacentTiles(24, field, output)
+    }
+    
+    @Test
+    public void testGetTileRow() {
+        SolverFunc sf = new SolverFunc(60, 10, 5);
+        int[] field = new int[50];
+        
+        int first = sf.getTileRow(9);
+        int second = sf.getTileRow(10);
+        
+        assertEquals(0, first);
+        assertEquals(1, second);
+    }
+    
+    @Test
+    public void testRelativePos() {
+        SolverFunc sf = new SolverFunc(60, 10, 5);
+        int[] field = {0,0,0,0,0,0,0,0,0,0,
+                       0,0,1,2,3,0,0,0,0,0,
+                       0,0,4,5,6,0,0,0,0,0,
+                       0,0,7,8,9,0,0,0,0,0,
+                       0,0,0,0,0,0,0,0,0,0};
+        
+        int leftUpper = sf.relativePos(0, 23);
+        int centerUpper = sf.relativePos(1, 23);
+        int rightUpper = sf.relativePos(2, 23);
+        int leftMiddle = sf.relativePos(3, 23);
+        int rightMiddle = sf.relativePos(4, 23);
+        int leftLower = sf.relativePos(5, 23);
+        int centerLower = sf.relativePos(6, 23);
+        int rightLower = sf.relativePos(7, 23);
+        
+        assertEquals(12, leftUpper);
+        assertEquals(13, centerUpper);
+        assertEquals(14, rightUpper);
+        assertEquals(22, leftMiddle);
+        assertEquals(24, rightMiddle);
+        assertEquals(32, leftLower);
+        assertEquals(33, centerLower);
+        assertEquals(34, rightLower);
+    }
 }

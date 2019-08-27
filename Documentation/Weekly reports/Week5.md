@@ -33,3 +33,7 @@ with 0 remaining, that means not a single state had a mine there.
 Therefore we know it is safe to open. If there is a spot where
 the number equals the amount of valid states, it means all states
 had a mine there. Therefore we know for certain there is a mine there.
+
+## Questions
+Can the math functions be used as is, for example min()?
+Or should I make my own math class?
