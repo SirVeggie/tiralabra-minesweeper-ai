@@ -47,7 +47,7 @@ public class SolverFunc {
      * @return output Returns the modified output parameter.
      */
     public int[] flagAdjacentTiles(int pos, int[] field) {
-        return markAdjacentTiles(pos, field, 3);
+        return markAdjacentTiles(pos, field, A_FLAG);
     }
     
     /**
@@ -58,7 +58,7 @@ public class SolverFunc {
      * @return output Returns the modified output parameter.
      */
     public int[] clickAdjacentTiles(int pos, int[] field) {
-        return markAdjacentTiles(pos, field, 1);
+        return markAdjacentTiles(pos, field, A_CLICK);
     }
     
     /**
@@ -152,6 +152,30 @@ public class SolverFunc {
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < arrays.length; j++) {
                 result[i] += arrays[j][i];
+            }
+        }
+        
+        return result;
+    }
+    
+    /**
+     * Replaces the base array's value with the writer array's value
+     * if writer array's value isn't empty / 0.
+     * 
+     * @param base
+     * @param writer
+     * @return result
+     */
+    public int[] overwriteArray(int[] base, int[] writer) {
+        int[] result = base.clone();
+        
+        if (writer.length > base.length) {
+            return null;
+        }
+        
+        for (int i = 0; i < base.length; i++) {
+            if (writer[i] != 0) {
+                result[i] = writer[i];
             }
         }
         

@@ -53,7 +53,7 @@ public class MineSolver {
                 
                 if (field[i] == count) {
                     progress = true;
-                    result = sf.flagAdjacentTiles(i, field);
+                    result = sf.overwriteArray(result, sf.flagAdjacentTiles(i, field));
                 }
                 
                 // Click if possible
@@ -61,7 +61,7 @@ public class MineSolver {
                 
                 if (field[i] == count) {
                     progress = true;
-                    result = sf.combineArrays(result, sf.clickAdjacentTiles(i, field));
+                    result = sf.overwriteArray(result, sf.clickAdjacentTiles(i, field));
                 }
             }
         }

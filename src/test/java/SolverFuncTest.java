@@ -142,6 +142,23 @@ public class SolverFuncTest {
         assertEquals(null, result);
     }
     
+    @Test
+    public void testOverwriteArray() {
+        SolverFunc sf = new SolverFunc(60, 10, 5);
+        int[] result;
+        int[] one = {1,1,1,1,1};
+        int[] two = {0,0,5,3};
+        int[] three = {0,0,5,7,8,9};
+        
+        int[] expected = {1,1,5,3,1};
+        
+        result = sf.overwriteArray(one, two);
+        assertEquals(true, arraysMatch(expected, result));
+        
+        result = sf.overwriteArray(one, three);
+        assertEquals(null, result);
+    }
+    
     
     
     // Helper functions
