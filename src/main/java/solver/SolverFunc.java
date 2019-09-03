@@ -173,7 +173,7 @@ public class SolverFunc {
             return null;
         }
         
-        for (int i = 0; i < base.length; i++) {
+        for (int i = 0; i < writer.length; i++) {
             if (writer[i] != 0) {
                 result[i] = writer[i];
             }
