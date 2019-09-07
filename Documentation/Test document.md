@@ -50,3 +50,4 @@ Here we can see the overall JUnit test coverage.
 
 Various classes are tested quite extensively, however
 the variability of matrix calculation testing is a bit lacking.
+HashMap testing is missing as well.
