@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import javax.sound.sampled.SourceDataLine;
 
-import java.util.HashMap;
 import util.*;
 import math.*;
 import solver.*;
