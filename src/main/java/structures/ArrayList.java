@@ -41,7 +41,10 @@ public class ArrayList<E> {
     public int remove(E item) {
         for (int i = 0; i < pointer; i++) {
             if (list[i] == item) {
-                shiftLeft(i);
+                if (i + 1 == pointer)
+                    pointer--;
+                else
+                    shiftLeft(i + 1);
                 return 0;
             }
         }
@@ -57,7 +60,10 @@ public class ArrayList<E> {
      */
     public void removeAt(int index) {
         if (index < pointer && index >= 0) {
-            shiftLeft(index);
+            if (index + 1 == pointer)
+                pointer--;
+            else
+                shiftLeft(index + 1);
         } else {
             throw new IndexOutOfBoundsException("ArrayList Index Out Of Bounds");
         }

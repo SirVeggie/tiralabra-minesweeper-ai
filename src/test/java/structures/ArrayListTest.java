@@ -29,6 +29,11 @@ public class ArrayListTest {
         assertEquals(Integer.valueOf(10), a.get(0));
     }
     
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetException() {
+        a.get(10);
+    }
+    
     @Test
     public void testArrayExpansion() {
         for (int i = 0; i < 60; i++) {
@@ -50,6 +55,11 @@ public class ArrayListTest {
         assertEquals(Integer.valueOf(2), a.get(5));
     }
     
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testSetException() {
+        a.set(10, 10);
+    }
+    
     @Test
     public void testRemoving() {
         for (int i = 0; i < 10; i++) {
@@ -60,6 +70,9 @@ public class ArrayListTest {
         
         assertEquals(9, a.size());
         assertEquals(Integer.valueOf(2), a.get(1));
+        assertEquals(Integer.valueOf(0), a.get(0));
+        
+        assertEquals(-1, a.remove(1000));
     }
     
     @Test
@@ -72,6 +85,16 @@ public class ArrayListTest {
         
         assertEquals(9, a.size());
         assertEquals(Integer.valueOf(2), a.get(1));
+        
+        int tmp = a.get(a.size()-1);
+        a.removeAt(a.size()-1);
+        
+        assertNotEquals(Integer.valueOf(tmp), a.get(a.size()-1));
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testRemoveAtException() {
+        a.removeAt(10);
     }
     
     @Test
