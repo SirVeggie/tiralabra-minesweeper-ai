@@ -18,7 +18,7 @@ the solver would most likely be much faster.
 Through testing it seems the AI can find almost all solutions, and
 can solve almost all minesweeper games, as long as it doesn't need to
 make guesses. Situations in which the AI cannot make the correct move
-have been mentioned [here](?).\
+have been mentioned [here](https://github.com/SirVeggie/tiralabra-minesweeper-ai/blob/master/Documentation/Implementation.md#improvements).\
 The AI also never makes a mistake (clicking on a mine) due to bugs or
 any other reason.
 
