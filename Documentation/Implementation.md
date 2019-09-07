@@ -59,12 +59,14 @@ Local Solver.\
 Local solver's time complexity is O(8n)
 
 Complex solver solves the other situations that Local cannot solve.\
-Its time complexity is roughly O(n + w * h<sup>2</sup>)
+Its time complexity is roughly O(n + w * h<sup>2</sup>)\
+Absolute worst case scenario: O(n<sup>3</sup>)
 
 ### Space complexity
 Local Solver: O(n)
 
-Complex Solver roughly: O(n + w * h<sup>2</sup>)
+Complex Solver roughly: O(n + w * h<sup>2</sup>)\
+Absolute worst case scenario: O(n<sup>3</sup>)
 
 ## Improvements
 ### Mine awareness
