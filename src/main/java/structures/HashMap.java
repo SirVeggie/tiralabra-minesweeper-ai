@@ -1,58 +1,152 @@
 package structures;
 
+import math.*;
+
 // Not ready
 public class HashMap<K, V> {
     private Entry<K, V>[] entryTable;
-    private static final int capacity = 16;
+    private static final int initialCapacity = 16;
     private int size = 0;
     
     public HashMap() {
-        this(capacity);
+        this(initialCapacity);
     }
     
     public HashMap(int capacity) {
         this.entryTable = new Entry[capacity];
     }
     
+    /**
+     * Returns the number of key-value pairs.
+     */
+    public int size() {
+        return size;
+    }
+    
+    /**
+     * Save a key-value pair.
+     * 
+     * @param key
+     * @param value
+     */
     public void put(K key, V value) {
-        Entry<K, V> entry = new Entry<>(key, value, null);
-        //int bucket = getHash(key) % getBucketSize();
-        int bucket = 0;
-        Entry<K, V> existing = entryTable[bucket];
+        if (key == null) throw new IllegalArgumentException("Null key is not valid");
         
-        if (existing == null) {
-            entryTable[bucket] = entry;
+        int hash = getHash(key);
+        Entry<K, V> entry = new Entry<K, V>(key, value, null);
+        
+        Entry<K, V> current = entryTable[hash];
+        if (current == null) {
+            entryTable[hash] = entry;
             size++;
         } else {
-            while (existing.next != null) {
-                if (existing.key.equals(key)) {
-                    existing.value = value;
+            while (current.next != null) {
+                if (current.key.equals(key)) {
+                    current.value = value;
                     return;
                 }
-                existing = existing.next;
+                
+                current = current.next;
             }
             
-            if (existing.key.equals(key)) {
-                existing.value = value;
+            if (current.key.equals(key)) {
+                current.value = value;
             } else {
-                existing.next = entry;
+                current.next = entry;
                 size++;
             }
         }
     }
     
+    /**
+     * Returns the saved value under the specified key.
+     * 
+     * @param key
+     * @return Saved value
+     */
     public V get(K key) {
-        //Entry<K, V> bucket = entryTable[getHash(key) % getBucketSize()];
-        Entry<K, V> bucket = null;
-        while (bucket != null) {
-            if (bucket.key.equals(key)) {
-                return bucket.value;
-            }
+        if (key == null) return null;
+        
+        int hash = getHash(key);
+        if (entryTable[hash] == null) {
+            return null;
+        } else {
+            Entry<K, V> temp = entryTable[hash];
             
-            bucket = bucket.next;
+            while (temp != null) {
+                if (temp.key.equals(key)) {
+                    return temp.value;
+                }
+                temp = temp.next;
+            }
         }
         
         return null;
+    }
+    
+    /**
+     * Remove a key-value pair saved under the specified key.
+     * 
+     * @param key
+     * @return True if key was found and removed, else false.
+     */
+    public boolean remove(K key) {
+        if (key == null) return false;
+        
+        int hash = getHash(key);
+        if (entryTable[hash] == null) {
+            return false;
+        } else {
+            Entry<K, V> current = entryTable[hash];
+            if (current.key.equals(key)) {
+                entryTable[hash] = current.next;
+                size--;
+                return true;
+            }
+            
+            while (current.next != null) {
+                if (current.next.key.equals(key)) {
+                    current.next = current.next.next;
+                    size--;
+                    return true;
+                }
+                
+                current = current.next;
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Checks if a key-value pair by the specified key exists.
+     * 
+     * @param key
+     * @return True if pair exists, else false.
+     */
+    public boolean containsKey(K key) {
+        if (key == null) return false;
+        
+        int hash = getHash(key);
+        if (entryTable[hash] == null) {
+            return false;
+        } else {
+            Entry<K, V> current = entryTable[hash];
+            while (current != null) {
+                if (current.key.equals(key)) {
+                    return true;
+                }
+                
+                current = current.next;
+            }
+        }
+        
+        return false;
+    }
+    
+    private int getHash(K key) {
+        BasicMath m = new BasicMath();
+        return m.abs(key.hashCode()) % initialCapacity;
     }
 }
 

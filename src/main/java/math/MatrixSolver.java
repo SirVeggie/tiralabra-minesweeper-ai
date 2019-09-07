@@ -1,7 +1,6 @@
 package math;
 
 import solver.SolverFunc;
-import java.util.HashMap;
 import structures.*;
 
 public class MatrixSolver {

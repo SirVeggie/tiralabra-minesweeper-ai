@@ -2,8 +2,6 @@ package solver;
 
 import structures.*;
 
-import java.util.HashMap;
-
 import math.*;
 
 public class MineSolver {
