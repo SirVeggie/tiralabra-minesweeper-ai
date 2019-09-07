@@ -14,6 +14,12 @@ This is not the maximum speed of solving though. The application just starts to 
 quicker inputs. If these solving steps were to be repeated within the application itself,
 the solver would most likely be much faster.
 
+### Big fields
+Testing with a big field (399 x 90 tiles):
+![Big boi field](/Documentation/Images/Bigboi_minesweeper.png)\
+While using a big field like this, there are noticeable freezes when the Complex Solver kicks in.
+It takes about a second for the Complex Solver to finish it's calculation in the worst situations.
+
 ## Ability
 Through testing it seems the AI can find almost all solutions, and
 can solve almost all minesweeper games, as long as it doesn't need to
