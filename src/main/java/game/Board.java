@@ -29,9 +29,10 @@ public class Board extends JPanel {
     private final int DRAW_MARK = 11;
     private final int DRAW_WRONG_MARK = 12;
 
-    private final int N_MINES = 1800;
-    private final int N_COLS = 90;
-    private final int N_ROWS = 90;
+    // Change these values to change the minefield configuration
+    private final int N_MINES = 700;
+    private final int N_COLS = 60;
+    private final int N_ROWS = 60;
 
     private final int BOARD_WIDTH = N_COLS * CELL_SIZE + 1;
     private final int BOARD_HEIGHT = N_ROWS * CELL_SIZE + 1;
