@@ -51,20 +51,20 @@ In this situation the value of `x3` is 0. So `x3` is safe.
 `w = matrix width`\
 `h = matrix height`
 
-The maximum width or height for the matrix is about `2/3*n`.
+The maximum width or height for the matrix is maybe about 2/3*n.
 
 ### Time complexity
 90% if not more of a normal difficulty game is solved by the
 Local Solver.\
-Local solver's time complexity is `O(8n)`
+Local solver's time complexity is O(8n)
 
 Complex solver solves the other situations that Local cannot solve.\
-Its time complexity is roughly `O(n + w * h`<sup>`2`</sup>`)`
+Its time complexity is roughly O(n + w * h<sup>2</sup>)
 
 ### Space complexity
-Local Solver: `O(n)`
+Local Solver: O(n)
 
-Complex Solver roughly: `O(5n + 2(w * h`<sup>`2`</sup>`))`
+Complex Solver roughly: O(5n + 2(w * h<sup>2</sup>))
 
 ## Improvements
 ### Mine awareness
