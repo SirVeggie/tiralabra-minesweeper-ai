@@ -36,6 +36,7 @@ public class HashMapTest {
         assertEquals(Integer.valueOf(0), map.get(10));
         
         assertEquals(null, map.get(1234));
+        assertEquals(null, map.get(null));
     }
     
     @Test
@@ -46,6 +47,14 @@ public class HashMapTest {
         
         for (int i = 0; i < 100; i++) {
             assertEquals(Integer.valueOf(i*i), map.get(i));
+        }
+        
+        for (int i = 0; i < 100; i++) {
+            map.put(i, i);
+        }
+        
+        for (int i = 0; i < 100; i++) {
+            assertEquals(Integer.valueOf(i), map.get(i));
         }
     }
     
@@ -58,7 +67,9 @@ public class HashMapTest {
         assertEquals(null, map.get(10));
         assertEquals(Integer.valueOf(-7), map.get(-2));
         assertEquals(1, map.size());
+        
         assertEquals(false, map.remove(1234));
+        assertEquals(false, map.remove(null));
     }
     
     @Test
@@ -68,6 +79,19 @@ public class HashMapTest {
         }
         
         for (int i = 0; i < 98; i++) {
+            map.remove(i);
+        }
+        
+        assertEquals(2, map.size());
+    }
+    
+    @Test
+    public void testRemoving3() {
+        for (int i = 0; i < 100; i++) {
+            map.put(i, i*i);
+        }
+        
+        for (int i = 99; i > 1; i--) {
             map.remove(i);
         }
         
