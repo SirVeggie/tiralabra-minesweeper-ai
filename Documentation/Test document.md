@@ -45,7 +45,8 @@ a reduced row form the solver would most likely be much faster.
 ## JUnit testing
 Here we can see the overall JUnit test coverage.
 
-![Test coverage](/Documentation/Images/test_report.png)
+![Test coverage](/Documentation/Images/test_report.png)\
+![Test coverage](/Documentation/Images/structure_coverage.png)
 
 Various classes are tested quite extensively, however
 the variability of matrix calculation testing is a bit lacking.
