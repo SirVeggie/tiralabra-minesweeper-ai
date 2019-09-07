@@ -42,7 +42,7 @@ matrix into the reduced row echelon form, from which to extract
 information. With a proper interpretation algorithm and
 a reduced row form the solver would most likely be much faster.
 
-## JUnit test
+## JUnit testing
 Here we can see the overall JUnit test coverage.
 
 ![Test coverage](/Documentation/Images/test_report.png)
