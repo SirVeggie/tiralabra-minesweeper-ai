@@ -10,9 +10,9 @@ https://github.com/janbodnar/Java-Minesweeper-Game
 
 ## Documentation
 ### [User manual](/Documentation/User%20manual.md)
-### [Requirements specification](/Documentation/Requirements%20specification.md)
-### [AI implementation](/Documentation/Implementation.md)
 ### [Performance](/Documentation/Test%20document.md)
+### [AI implementation](/Documentation/Implementation.md)
+### [Requirements specification](/Documentation/Requirements%20specification.md)
 
 ### Weekly reports
 [Week 1](/Documentation/Weekly%20reports/Week1.md)\
