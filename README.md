@@ -9,8 +9,10 @@ Code under 'game' is copied and modified from here:
 https://github.com/janbodnar/Java-Minesweeper-Game
 
 ## Documentation
-
-[Requirements specification](/Documentation/Requirements%20specification.md)
+### [User manual](/Documentation/User%20manual.md)
+### [Requirements specification](/Documentation/Requirements%20specification.md)
+### [AI implementation](/Documentation/Implementation.md)
+### [Performance](/Documentation/Test%20document.md)
 
 ### Weekly reports
 
