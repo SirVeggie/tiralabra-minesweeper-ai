@@ -87,7 +87,7 @@ public class ArrayList<E> {
      * Checks if list is full. If so, the size of the array is doubled
      * and items are moved to the new array.
      */
-    public void checkAndExpand() {
+    private void checkAndExpand() {
         if (pointer == list.length) {
             Object[] old = list.clone();
             list = new Object[old.length * 2];
@@ -103,7 +103,7 @@ public class ArrayList<E> {
      * 
      * @param index
      */
-    public void shiftLeft(int index) {
+    private void shiftLeft(int index) {
         if (index >= 1 && index < pointer) {
             for (int k = index; k < pointer; k++) {
                 list[k - 1] = list[k];
