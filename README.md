@@ -13,6 +13,7 @@ https://github.com/janbodnar/Java-Minesweeper-Game
 ### [Performance](/Documentation/Test%20document.md)
 ### [AI implementation](/Documentation/Implementation.md)
 ### [Requirements specification](/Documentation/Requirements%20specification.md)
+### [JavaDoc](https://github.com/SirVeggie/tiralabra-minesweeper-ai/tree/master/Documentation/JavaDoc)
 
 ### Weekly reports
 [Week 1](/Documentation/Weekly%20reports/Week1.md)\

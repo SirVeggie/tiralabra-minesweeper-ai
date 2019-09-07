@@ -1,6 +1,12 @@
 # User manual
 This is a guide to using this application.
 
+Note: The size and mines of the minefield can be changed
+in the class Board with the following variables:\
+`N_MINES`\
+`N_COLS`\
+`N_ROWS`
+
 ## Features
 This application has very simplistic features.
  - Normal minesweeper game mechanics
