@@ -50,5 +50,3 @@ Here we can see the overall JUnit test coverage.
 
 Various classes are tested quite extensively, however
 the variability of matrix calculation testing is a bit lacking.
-In structures, hashmap and entry have not been implemented fully yet,
-so their non existent tests are pulling the average down.
