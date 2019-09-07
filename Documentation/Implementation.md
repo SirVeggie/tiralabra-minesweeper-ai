@@ -64,7 +64,7 @@ Its time complexity is roughly O(n + w * h<sup>2</sup>)
 ### Space complexity
 Local Solver: O(n)
 
-Complex Solver roughly: O(5n + 2(w * h<sup>2</sup>))
+Complex Solver roughly: O(n + w * h<sup>2</sup>)
 
 ## Improvements
 ### Mine awareness
