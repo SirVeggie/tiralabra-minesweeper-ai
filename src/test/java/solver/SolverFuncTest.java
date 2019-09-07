@@ -4,17 +4,27 @@ import static org.junit.Assert.*;
 
 import javax.sound.sampled.SourceDataLine;
 
+import structures.*;
 import solver.*;
+import util.*;
 
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SolverFuncTest {
+    private SolverFunc sf;
+    private TestHelper th;
+    
+    @Before
+    public void setup() {
+        sf = new SolverFunc(10, 5);
+        th = new TestHelper();
+    }
     
     @Test
     public void testTileCounting() {
-        SolverFunc sf = new SolverFunc(60, 10, 5);
         int[] field = new int[50];
         
         field[10] = 10;
@@ -38,7 +48,6 @@ public class SolverFuncTest {
     
     @Test
     public void testCountingOutOfBounds() {
-        SolverFunc sf = new SolverFunc(60, 10, 5);
         int[] field = new int[50];
         
         int count = sf.countAdjacentTiles(0, 0, field);
@@ -56,7 +65,6 @@ public class SolverFuncTest {
     
     @Test
     public void testMarking() {
-        SolverFunc sf = new SolverFunc(60, 10, 5);
         int[] field = {0,0,0,0,0,0,0,0,0,0,
                        0,0,0,9,10,1,0,0,0,0,
                        0,0,0,5,10,10,0,0,0,0,
@@ -70,7 +78,7 @@ public class SolverFuncTest {
                           0,0,0,0,0,0,0,0,0,0};
         
         int[] result1 = sf.markAdjacentTiles(24, field, 3);
-        assertEquals(true, arraysMatch(expected1, result1));
+        assertEquals(true, th.arraysMatch(expected1, result1));
         
         int[] expected2 = {0,0,0,0,0,0,0,0,0,0,
                            0,0,0,0,0,0,0,0,0,0,
@@ -79,12 +87,33 @@ public class SolverFuncTest {
                            0,0,0,0,0,0,0,3,0,3};
 
         int[] result2 = sf.markAdjacentTiles(48, field, 3);
-        assertEquals(true, arraysMatch(expected2, result2));
+        assertEquals(true, th.arraysMatch(expected2, result2));
+    }
+    
+    @Test
+    public void testFindUnsolved() {
+        int[] field = {10, 3, 0, 0, 0, 4,10, 0, 0,10,
+                        0, 0,10, 0, 0, 0, 0, 0, 1, 0,
+                       10, 0, 0, 0,10, 0, 0, 0, 7, 0,
+                        5, 0, 0,10, 0, 6, 0,10, 0, 5,
+                        0, 0, 0, 0, 0, 0, 8, 0, 0, 2};
+        
+        ArrayList<Integer> expected = new ArrayList<>();
+        expected.add(1);
+        expected.add(5);
+        expected.add(18);
+        expected.add(28);
+        expected.add(30);
+        expected.add(35);
+        expected.add(46);
+        
+        ArrayList<Integer> result = sf.findUnsolvedNumbers(field);
+        
+        assertEquals(expected, result);
     }
     
     @Test
     public void testGetTileRow() {
-        SolverFunc sf = new SolverFunc(60, 10, 5);
         int[] field = new int[50];
         
         int first = sf.getTileRow(9);
@@ -96,7 +125,6 @@ public class SolverFuncTest {
     
     @Test
     public void testRelativePos() {
-        SolverFunc sf = new SolverFunc(60, 10, 5);
         int[] field = {0,0,0,0,0,0,0,0,0,0,
                        0,0,1,2,3,0,0,0,0,0,
                        0,0,4,5,6,0,0,0,0,0,
@@ -124,7 +152,6 @@ public class SolverFuncTest {
     
     @Test
     public void testCombineArrays() {
-        SolverFunc sf = new SolverFunc(60, 10, 5);
         int[] result;
         int[] one = {0,0,0,0,0};
         int[] two = {1,1,1,1,1};
@@ -133,45 +160,58 @@ public class SolverFuncTest {
         int[] expected = {2,3,4,5,6};
         
         result = sf.combineArrays(one,two,three);
-        assertEquals(true, arraysMatch(expected, result));
+        assertEquals(true, th.arraysMatch(expected, result));
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testCombineException() {
         
-        int[] four = {1,2,3};
-        int[] five = {1,2,3,4};
+        int[] one = {1,2,3};
+        int[] two = {1,2,3,4};
         
-        result = sf.combineArrays(four, five);
-        assertEquals(null, result);
+        sf.combineArrays(one, two);
     }
     
     @Test
     public void testOverwriteArray() {
-        SolverFunc sf = new SolverFunc(60, 10, 5);
         int[] result;
         int[] one = {1,1,1,1,1};
         int[] two = {0,0,5,3};
-        int[] three = {0,0,5,7,8,9};
         
         int[] expected = {1,1,5,3,1};
         
         result = sf.overwriteArray(one, two);
-        assertEquals(true, arraysMatch(expected, result));
-        
-        result = sf.overwriteArray(one, three);
-        assertEquals(null, result);
+        assertEquals(true, th.arraysMatch(expected, result));
     }
     
-    
-    
-    // Helper functions
-    
-    private boolean arraysMatch(int[] array1, int[] array2) {
-        if (array1.length != array2.length) {
-            return false;
-        }
+    @Test(expected = IllegalArgumentException.class)
+    public void testOverwriteException() {
         
-        for (int i = 0; i < array1.length; i++) {
-            if (array1[i] != array2[i]) return false;
-        }
+        int[] one = {1,1,1,1,1};
+        int[] two = {0,0,1,1,0,0};
         
-        return true;
+        sf.overwriteArray(one, two);
+    }
+    
+    @Test
+    public void testSubtractArrays() {
+        double[] result;
+        
+        double[] one = {3,3,3,3,3,3};
+        double[] two = {-1,0,1,2,3,4};
+        
+        double[] expected = {4,3,2,1,0,-1};
+        
+        result = sf.subtractArray(one, two);
+        assertEquals(true, th.arraysMatch(expected, result));
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testSubtractException() {
+        
+        double[] one = {3,3,3,3,3,3};
+        double[] two = {1,2};
+        
+        sf.subtractArray(one, two);
     }
 }

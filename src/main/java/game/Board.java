@@ -29,9 +29,9 @@ public class Board extends JPanel {
     private final int DRAW_MARK = 11;
     private final int DRAW_WRONG_MARK = 12;
 
-    private final int N_MINES = 30;
-    private final int N_COLS = 16;
-    private final int N_ROWS = 16;
+    private final int N_MINES = 1800;
+    private final int N_COLS = 90;
+    private final int N_ROWS = 90;
 
     private final int BOARD_WIDTH = N_COLS * CELL_SIZE + 1;
     private final int BOARD_HEIGHT = N_ROWS * CELL_SIZE + 1;
@@ -47,8 +47,7 @@ public class Board extends JPanel {
     private MineSolver solver;
 
     public Board(JLabel statusbar) {
-
-        this.solver = new MineSolver(N_MINES, N_COLS, N_ROWS);
+        this.solver = new MineSolver(N_COLS, N_ROWS);
         this.statusbar = statusbar;
         initBoard();
     }
@@ -60,9 +59,10 @@ public class Board extends JPanel {
         img = new Image[NUM_IMAGES];
 
         for (int i = 0; i < NUM_IMAGES; i++) {
-
-            String path = "src/resources/" + i + ".png";
+            String path = "src/main/resources/" + i + ".png";
             img[i] = (new ImageIcon(path)).getImage();
+            //String path = "/game/resources/" + i + ".png";
+            //img[i] = (new ImageIcon(this.getClass().getResource(path))).getImage();
         }
 
         addMouseListener(new MinesAdapter());
@@ -307,21 +307,20 @@ public class Board extends JPanel {
     
     
     // Modified code by Veikka
-    
     private class MinesAdapter extends MouseAdapter {
-
+        
         @Override
         public void mousePressed(MouseEvent e) {
-
+            
             int x = e.getX();
             int y = e.getY();
 
             int cCol = x / CELL_SIZE;
             int cRow = y / CELL_SIZE;
-
-            boolean doRepaint = false;
-
+            
             if (!inGame) {
+                if (e.getButton() == MouseEvent.BUTTON2)
+                    return;
                 newGame();
                 repaint();
             }

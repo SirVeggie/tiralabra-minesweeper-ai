@@ -12,6 +12,32 @@ The results from this manual testing can be seen here:\
 
 This is not the maximum speed of solving though. The application just starts to lag with
 quicker inputs. If these solving steps were to be repeated within the application itself,
-the solver would most likely be near instantaneous.
+the solver would most likely be much faster.
 
-## Automatic testing
+## Ability
+Through testing it seems the AI can find almost all solutions, and
+can solve almost all minesweeper games, as long as it doesn't need to
+make guesses. Situations in which the AI cannot make the correct move
+have been mentioned [here](?).\
+The AI also never makes a mistake (clicking on a mine) due to bugs or
+any other reason.
+
+## Optimization
+In its present state, the algorithm is not very well optimized.
+It uses many inefficient actions especially in interpreting
+the matrix that is generated and solved from the minefield's state.
+
+The matrix is manipulated into a row echelon form. This is not
+the most reduced from however. It is simply easier to write an
+algorithm that deduces mine placement information from the
+semi-solved form of the matrix. This is because in the
+semi-solved form all values are integers. After reducing the
+matrix, most numbers will be decimal numbers instead.\
+To get all possible information out of the matrix, there is still
+a need to compare the rows of the matrix with each other. This
+multiplies the amount needed to interpret the matrix by a factor.
+
+A more efficient method would most likely be to manipulate the 
+matrix into the reduced row echelon form, from which to extract
+information. With a proper interpretation algorithm and
+a reduced row form the solver would most likely be much faster.

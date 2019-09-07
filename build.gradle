@@ -47,4 +47,10 @@ jacocoTestReport {
     }
 }
 
+jar {  
+	manifest {
+		attributes 'Main-Class': 'game.Minesweeper'
+	}
+}
+
 check.dependsOn jacocoTestReport

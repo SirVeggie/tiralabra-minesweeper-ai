@@ -1,18 +1,21 @@
 package solver;
 
+import structures.*;
+
+// General functions used across the application.
 public class SolverFunc {
-    private final int A_CLICK = 1;
-    private final int A_FLAG = 3;
+    private final int ACTION_CLICK = 1;
+    private final int ACTION_FLAG = 3;
     
-    private int N_MINES;
-    private int N_COLS;
-    private int N_ROWS;
+    private int COLS;
+    private int ROWS;
     private int FIELD_SIZE;
     
-    public SolverFunc(int mines, int cols, int rows) {
-        this.N_MINES = mines;
-        this.N_COLS = cols;
-        this.N_ROWS = rows;
+    public SolverFunc() {}
+    
+    public SolverFunc(int cols, int rows) {
+        this.COLS = cols;
+        this.ROWS = rows;
         this.FIELD_SIZE = cols*rows;
     }
     
@@ -20,9 +23,9 @@ public class SolverFunc {
      * Counts the adjacent tiles of a given position of the specific type.
      * 
      * @param pos Target point on the field.
-     * @param type Which tile to search for.
+     * @param type Which tile type to search for.
      * @param field The field to search tiles from.
-     * @return int Returns the amount found.
+     * @return The amount of tiles found.
      */
     public int countAdjacentTiles(int pos, int type, int[] field) {
         int count = 0;
@@ -42,30 +45,36 @@ public class SolverFunc {
     /**
      * Marks all adjacent covered tiles for flagging.
      * 
-     * @param pos Target point on the field.
-     * @param field The field to search tiles from.
-     * @return output Returns the modified output parameter.
+     * @param pos Target point on the field
+     * @param field The field to search tiles from
+     * @return Instruction set marked with positions where to flag
      */
     public int[] flagAdjacentTiles(int pos, int[] field) {
-        return markAdjacentTiles(pos, field, A_FLAG);
+        return markAdjacentTiles(pos, field, ACTION_FLAG);
     }
     
     /**
      * Marks all adjacent covered tiles for clicking.
      * 
-     * @param pos Target point on the field.
-     * @param field The field to search tiles from.
-     * @return output Returns the modified output parameter.
+     * @param pos Target point on the field
+     * @param field The field to search tiles from
+     * @return Instruction set marked with positions where to click
      */
     public int[] clickAdjacentTiles(int pos, int[] field) {
-        return markAdjacentTiles(pos, field, A_CLICK);
+        return markAdjacentTiles(pos, field, ACTION_CLICK);
     }
     
     /**
-     * Use flag or click instead of mark for readability.
+     * Mark adjacent tiles with a number in the instruction set.
+     * 
+     * @param pos Target position on the field
+     * @param field Current state of the minefield
+     * @param mark Number to mark with
+     * @return Instruction set marked with the given number
      */
     public int[] markAdjacentTiles(int pos, int[] field, int mark) {
         int[] output = new int[field.length];
+        
         for (int i = 0; i < 8; i++) {
             int pointer = relativePos(i, pos);
             
@@ -80,14 +89,34 @@ public class SolverFunc {
     }
     
     /**
+     * Finds all number tiles that have unrevealed tiles as neighbours.
+     * Saves tile coordinates to an ArrayList.
+     * 
+     * @param field Current state of the minefield
+     * @return An ArrayList of found tiles' coordinates.
+     */
+    public ArrayList<Integer> findUnsolvedNumbers(int[] field) {
+        ArrayList<Integer> result = new ArrayList<>();
+        
+        for (int i = 0; i < field.length; i++) {
+            if (field[i] <= 8 && field[i] >= 1 && countAdjacentTiles(i, 10, field) >= 1) {
+                result.add(i);
+            }
+        }
+        
+        return result;
+    }
+    
+    /**
      * Gets the absolute position of the wanted relative position.
      * [0][1][2]
      * [3][x][4]
      * [5][6][7]
      * 
-     * @param pos Relative position.
-     * @param truepos Target point on the field.
-     * @return output Returns the modified output parameter.
+     * @param pos Relative position to the target point
+     * @param truepos Target point on the field
+     * @return Absolute position on the minefield.
+     *         -1 if position is outside of the field.
      */
     public int relativePos(int pos, int truepos) {
         int row = getTileRow(truepos);
@@ -95,15 +124,15 @@ public class SolverFunc {
         
         switch (pos) {
             case 0:
-                result = truepos - N_COLS - 1;
+                result = truepos - COLS - 1;
                 if (getTileRow(result) != row - 1 || result < 0) result = -1;
                 break;
             case 1:
-                result = truepos - N_COLS;
+                result = truepos - COLS;
                 if (result < 0) result = -1;
                 break;
             case 2:
-                result = truepos - N_COLS + 1;
+                result = truepos - COLS + 1;
                 if (getTileRow(result) != row - 1 || result < 0) result = -1;
                 break;
             case 3:
@@ -115,15 +144,15 @@ public class SolverFunc {
                 if (getTileRow(result) != row || result >= FIELD_SIZE) result = -1;
                 break;
             case 5:
-                result = truepos + N_COLS - 1;
+                result = truepos + COLS - 1;
                 if (getTileRow(result) != row + 1 || result >= FIELD_SIZE) result = -1;
                 break;
             case 6:
-                result = truepos + N_COLS;
+                result = truepos + COLS;
                 if (result >= FIELD_SIZE) result = -1;
                 break;
             case 7:
-                result = truepos + N_COLS + 1;
+                result = truepos + COLS + 1;
                 if (getTileRow(result) != row + 1 || result >= FIELD_SIZE) result = -1;
                 break;
         }
@@ -131,12 +160,19 @@ public class SolverFunc {
         return result;
     }
     
+    /**
+     * Gives the current row of this position.
+     * 
+     * @param pos Position on the minefield
+     * @return Current row of the given position
+     */
     public int getTileRow(int pos) {
-        return pos / N_COLS;
+        return pos / COLS;
     }
     
     /**
-     * Adds the values of different arrays together, if same length.
+     * Adds the values of different arrays together,
+     * if their length is the same.
      * 
      * @param arrays Any number of int[] type arrays.
      * @return Returns the combined array.
@@ -144,7 +180,7 @@ public class SolverFunc {
     public int[] combineArrays(int[]... arrays) {
         int length = arrays[0].length;
         for (int i = 1; i < arrays.length; i++) {
-            if (arrays[i].length != length) return null;
+            if (arrays[i].length != length) throw new IllegalArgumentException("Arrays are not of equal length.");
         }
         
         int[] result = new int[length];
@@ -160,23 +196,40 @@ public class SolverFunc {
     
     /**
      * Replaces the base array's value with the writer array's value
-     * if writer array's value isn't empty / 0.
+     * if writer array's value isn't 0.
      * 
      * @param base
      * @param writer
-     * @return result
+     * @return Overwritten array
      */
     public int[] overwriteArray(int[] base, int[] writer) {
-        int[] result = base.clone();
+        if (writer.length > base.length) throw new IllegalArgumentException("Writer array is bigger than base.");
         
-        if (writer.length > base.length) {
-            return null;
-        }
+        int[] result = base.clone();
         
         for (int i = 0; i < writer.length; i++) {
             if (writer[i] != 0) {
                 result[i] = writer[i];
             }
+        }
+        
+        return result;
+    }
+    
+    /**
+     * Subtract values of array2 from array1.
+     * 
+     * @param array1
+     * @param array2
+     * @return Array1 - Array2
+     */
+    public double[] subtractArray(double[] array1, double[] array2) {
+        if (array1.length != array2.length) throw new IllegalArgumentException("Arrays are not of equal length.");
+        
+        double[] result = new double[array1.length];
+        
+        for (int i = 0; i < array1.length; i++) {
+            result[i] = array1[i] - array2[i];
         }
         
         return result;
